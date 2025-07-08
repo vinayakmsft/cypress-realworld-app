@@ -1,0 +1,1568 @@
+{
+  "application": {
+    "name": "Cypress Real World App",
+    "description": "A payment application demonstrating real-world usage of Cypress testing methods",
+    "version": "1.0.0",
+    "baseUrl": "http://localhost:3000",
+    "defaultCredentials": {
+      "username": "Heath93",
+      "password": "s3cret"
+    }
+  },
+  "testScenarios": [
+    {
+      "id": "AUTH_001",
+      "title": "User Sign Up - Valid Registration",
+      "category": "Authentication",
+      "priority": "High",
+      "tags": ["registration", "positive", "smoke"],
+      "preconditions": [
+        "Application is running on localhost:3000",
+        "User is not logged in",
+        "Navigate to Sign Up page"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Click on 'Sign Up' link",
+          "expected": "Sign Up form is displayed"
+        },
+        {
+          "step": 2,
+          "action": "Enter valid first name: 'John'",
+          "expected": "First name field accepts input"
+        },
+        {
+          "step": 3,
+          "action": "Enter valid last name: 'Doe'",
+          "expected": "Last name field accepts input"
+        },
+        {
+          "step": 4,
+          "action": "Enter valid username: 'johndoe123'",
+          "expected": "Username field accepts input"
+        },
+        {
+          "step": 5,
+          "action": "Enter valid password: 'password123'",
+          "expected": "Password field accepts input (masked)"
+        },
+        {
+          "step": 6,
+          "action": "Confirm password: 'password123'",
+          "expected": "Confirm password field accepts input (masked)"
+        },
+        {
+          "step": 7,
+          "action": "Click 'Sign Up' button",
+          "expected": "User is redirected to Sign In page with success message"
+        }
+      ],
+      "expectedResult": "User account is created successfully and redirected to Sign In page",
+      "testData": {
+        "firstName": "John",
+        "lastName": "Doe",
+        "username": "johndoe123",
+        "password": "password123"
+      }
+    },
+    {
+      "id": "AUTH_002",
+      "title": "User Sign In - Valid Credentials",
+      "category": "Authentication",
+      "priority": "High",
+      "tags": ["login", "positive", "smoke"],
+      "preconditions": [
+        "User account exists",
+        "User is on Sign In page"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Enter valid username: 'Heath93'",
+          "expected": "Username field accepts input"
+        },
+        {
+          "step": 2,
+          "action": "Enter valid password: 's3cret'",
+          "expected": "Password field accepts input (masked)"
+        },
+        {
+          "step": 3,
+          "action": "Click 'Sign In' button",
+          "expected": "User is redirected to home page with transaction feed"
+        }
+      ],
+      "expectedResult": "User is successfully logged in and redirected to home page",
+      "testData": {
+        "username": "Heath93",
+        "password": "s3cret"
+      }
+    },
+    {
+      "id": "AUTH_003",
+      "title": "User Sign In - Invalid Credentials",
+      "category": "Authentication",
+      "priority": "High",
+      "tags": ["login", "negative", "security"],
+      "preconditions": [
+        "User is on Sign In page"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Enter invalid username: 'invaliduser'",
+          "expected": "Username field accepts input"
+        },
+        {
+          "step": 2,
+          "action": "Enter invalid password: 'wrongpassword'",
+          "expected": "Password field accepts input (masked)"
+        },
+        {
+          "step": 3,
+          "action": "Click 'Sign In' button",
+          "expected": "Error message is displayed indicating invalid credentials"
+        }
+      ],
+      "expectedResult": "Authentication fails and error message is shown",
+      "testData": {
+        "username": "invaliduser",
+        "password": "wrongpassword"
+      }
+    },
+    {
+      "id": "AUTH_004",
+      "title": "User Sign Out",
+      "category": "Authentication",
+      "priority": "High",
+      "tags": ["logout", "positive", "smoke"],
+      "preconditions": [
+        "User is logged in",
+        "User is on any page of the application"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Click on navigation menu (hamburger icon for mobile)",
+          "expected": "Navigation drawer opens"
+        },
+        {
+          "step": 2,
+          "action": "Click 'Logout' option",
+          "expected": "User is redirected to Sign In page"
+        }
+      ],
+      "expectedResult": "User is successfully logged out and redirected to Sign In page"
+    },
+    {
+      "id": "TRANS_001",
+      "title": "Create Payment Transaction - Valid Data",
+      "category": "Transactions",
+      "priority": "High",
+      "tags": ["payment", "positive", "smoke"],
+      "preconditions": [
+        "User is logged in",
+        "User has sufficient balance",
+        "User has contacts in the system"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Click 'New Transaction' button",
+          "expected": "New transaction form opens - Step 1: Select Contact"
+        },
+        {
+          "step": 2,
+          "action": "Search for contact by typing first name in search field",
+          "expected": "Contact list is filtered based on search criteria"
+        },
+        {
+          "step": 3,
+          "action": "Select a contact from the list",
+          "expected": "Contact is selected and form proceeds to Step 2: Payment"
+        },
+        {
+          "step": 4,
+          "action": "Enter payment amount: '$25.00'",
+          "expected": "Amount field accepts valid monetary input"
+        },
+        {
+          "step": 5,
+          "action": "Enter description: 'Lunch payment'",
+          "expected": "Description field accepts input"
+        },
+        {
+          "step": 6,
+          "action": "Click 'Pay' button",
+          "expected": "Transaction is processed and Step 3: Complete is shown"
+        },
+        {
+          "step": 7,
+          "action": "Verify transaction completion message",
+          "expected": "Success message shows 'Paid $25.00 for Lunch payment'"
+        }
+      ],
+      "expectedResult": "Payment transaction is created successfully and user balance is updated",
+      "testData": {
+        "amount": "25.00",
+        "description": "Lunch payment",
+        "transactionType": "payment"
+      }
+    },
+    {
+      "id": "TRANS_002",
+      "title": "Create Request Transaction - Valid Data",
+      "category": "Transactions",
+      "priority": "High",
+      "tags": ["request", "positive", "smoke"],
+      "preconditions": [
+        "User is logged in",
+        "User has contacts in the system"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Click 'New Transaction' button",
+          "expected": "New transaction form opens - Step 1: Select Contact"
+        },
+        {
+          "step": 2,
+          "action": "Search and select a contact",
+          "expected": "Contact is selected and form proceeds to Step 2: Payment"
+        },
+        {
+          "step": 3,
+          "action": "Enter request amount: '$50.00'",
+          "expected": "Amount field accepts valid monetary input"
+        },
+        {
+          "step": 4,
+          "action": "Enter description: 'Dinner split'",
+          "expected": "Description field accepts input"
+        },
+        {
+          "step": 5,
+          "action": "Click 'Request' button",
+          "expected": "Transaction request is processed and Step 3: Complete is shown"
+        },
+        {
+          "step": 6,
+          "action": "Verify request completion message",
+          "expected": "Success message shows 'Requested $50.00 for Dinner split'"
+        }
+      ],
+      "expectedResult": "Request transaction is created successfully and notification is sent to contact",
+      "testData": {
+        "amount": "50.00",
+        "description": "Dinner split",
+        "transactionType": "request"
+      }
+    },
+    {
+      "id": "TRANS_003",
+      "title": "View Transaction Details",
+      "category": "Transactions",
+      "priority": "Medium",
+      "tags": ["view", "positive", "smoke"],
+      "preconditions": [
+        "User is logged in",
+        "At least one transaction exists"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Navigate to Personal transactions tab",
+          "expected": "Personal transactions list is displayed"
+        },
+        {
+          "step": 2,
+          "action": "Click on any transaction item",
+          "expected": "Transaction detail page opens"
+        },
+        {
+          "step": 3,
+          "action": "Verify transaction information displayed",
+          "expected": "All transaction details are shown: amount, description, participants, date"
+        },
+        {
+          "step": 4,
+          "action": "Check like and comment counts",
+          "expected": "Social interaction counts are displayed"
+        }
+      ],
+      "expectedResult": "Transaction details are displayed correctly with all relevant information"
+    },
+    {
+      "id": "TRANS_004",
+      "title": "Like a Transaction",
+      "category": "Transactions",
+      "priority": "Low",
+      "tags": ["social", "positive", "like"],
+      "preconditions": [
+        "User is logged in",
+        "User is viewing a transaction detail page",
+        "Transaction has not been liked by current user"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Click the like button (thumbs up icon)",
+          "expected": "Like button is disabled and like count increases by 1"
+        },
+        {
+          "step": 2,
+          "action": "Verify like count update",
+          "expected": "Like count reflects the new like"
+        }
+      ],
+      "expectedResult": "Transaction is liked successfully and like count is updated"
+    },
+    {
+      "id": "TRANS_005",
+      "title": "Comment on Transaction",
+      "category": "Transactions",
+      "priority": "Low",
+      "tags": ["social", "positive", "comment"],
+      "preconditions": [
+        "User is logged in",
+        "User is viewing a transaction detail page"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Scroll to comment section",
+          "expected": "Comment form is visible"
+        },
+        {
+          "step": 2,
+          "action": "Enter comment: 'Great transaction!'",
+          "expected": "Comment text is entered in the field"
+        },
+        {
+          "step": 3,
+          "action": "Click 'Post Comment' button",
+          "expected": "Comment is submitted and appears in comments list"
+        }
+      ],
+      "expectedResult": "Comment is posted successfully and visible in transaction comments",
+      "testData": {
+        "comment": "Great transaction!"
+      }
+    },
+    {
+      "id": "TRANS_006",
+      "title": "Accept Transaction Request",
+      "category": "Transactions",
+      "priority": "High",
+      "tags": ["request", "positive", "accept"],
+      "preconditions": [
+        "User is logged in",
+        "User has received a transaction request",
+        "Transaction request is in pending status"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Navigate to Personal transactions tab",
+          "expected": "Personal transactions list is displayed"
+        },
+        {
+          "step": 2,
+          "action": "Click on pending transaction request",
+          "expected": "Transaction detail page opens with Accept/Reject buttons"
+        },
+        {
+          "step": 3,
+          "action": "Click 'Accept Request' button",
+          "expected": "Transaction is accepted and buttons are hidden"
+        }
+      ],
+      "expectedResult": "Transaction request is accepted and status is updated to complete"
+    },
+    {
+      "id": "TRANS_007",
+      "title": "Reject Transaction Request",
+      "category": "Transactions",
+      "priority": "High",
+      "tags": ["request", "negative", "reject"],
+      "preconditions": [
+        "User is logged in",
+        "User has received a transaction request",
+        "Transaction request is in pending status"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Navigate to Personal transactions tab",
+          "expected": "Personal transactions list is displayed"
+        },
+        {
+          "step": 2,
+          "action": "Click on pending transaction request",
+          "expected": "Transaction detail page opens with Accept/Reject buttons"
+        },
+        {
+          "step": 3,
+          "action": "Click 'Reject Request' button",
+          "expected": "Transaction is rejected and buttons are hidden"
+        }
+      ],
+      "expectedResult": "Transaction request is rejected and status is updated to rejected"
+    },
+    {
+      "id": "TRANS_008",
+      "title": "Transaction Form Validation - Empty Fields",
+      "category": "Transactions",
+      "priority": "Medium",
+      "tags": ["validation", "negative", "form"],
+      "preconditions": [
+        "User is logged in",
+        "User is on Step 2 of new transaction form"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Leave amount field empty",
+          "expected": "Amount field is empty"
+        },
+        {
+          "step": 2,
+          "action": "Leave description field empty",
+          "expected": "Description field is empty"
+        },
+        {
+          "step": 3,
+          "action": "Click 'Pay' or 'Request' button",
+          "expected": "Validation errors are displayed for required fields"
+        }
+      ],
+      "expectedResult": "Form validation prevents submission with empty required fields"
+    },
+    {
+      "id": "TRANS_009",
+      "title": "Transaction Form Validation - Invalid Amount",
+      "category": "Transactions",
+      "priority": "Medium",
+      "tags": ["validation", "negative", "amount"],
+      "preconditions": [
+        "User is logged in",
+        "User is on Step 2 of new transaction form"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Enter invalid amount: '$0.00'",
+          "expected": "Amount field accepts input"
+        },
+        {
+          "step": 2,
+          "action": "Enter valid description: 'Test'",
+          "expected": "Description field accepts input"
+        },
+        {
+          "step": 3,
+          "action": "Click 'Pay' or 'Request' button",
+          "expected": "Validation error for invalid amount is displayed"
+        }
+      ],
+      "expectedResult": "Form validation prevents submission with invalid amount",
+      "testData": {
+        "amount": "0.00",
+        "description": "Test"
+      }
+    },
+    {
+      "id": "BANK_001",
+      "title": "Add Bank Account - Valid Data",
+      "category": "Bank Accounts",
+      "priority": "High",
+      "tags": ["banking", "positive", "smoke"],
+      "preconditions": [
+        "User is logged in",
+        "User navigates to Bank Accounts page"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Click 'Create' button",
+          "expected": "Bank account form is displayed"
+        },
+        {
+          "step": 2,
+          "action": "Enter bank name: 'Wells Fargo'",
+          "expected": "Bank name field accepts input"
+        },
+        {
+          "step": 3,
+          "action": "Enter account number: '1234567890'",
+          "expected": "Account number field accepts input"
+        },
+        {
+          "step": 4,
+          "action": "Enter routing number: '123456789'",
+          "expected": "Routing number field accepts input"
+        },
+        {
+          "step": 5,
+          "action": "Click 'Save' button",
+          "expected": "Bank account is created and appears in the list"
+        }
+      ],
+      "expectedResult": "Bank account is successfully created and displayed in the list",
+      "testData": {
+        "bankName": "Wells Fargo",
+        "accountNumber": "1234567890",
+        "routingNumber": "123456789"
+      }
+    },
+    {
+      "id": "BANK_002",
+      "title": "Delete Bank Account",
+      "category": "Bank Accounts",
+      "priority": "Medium",
+      "tags": ["banking", "negative", "delete"],
+      "preconditions": [
+        "User is logged in",
+        "User has at least one bank account",
+        "User is on Bank Accounts page"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Click 'Delete' button next to a bank account",
+          "expected": "Confirmation dialog or bank account is immediately deleted"
+        },
+        {
+          "step": 2,
+          "action": "Confirm deletion if prompted",
+          "expected": "Bank account is removed from the list"
+        }
+      ],
+      "expectedResult": "Bank account is successfully deleted and removed from the list"
+    },
+    {
+      "id": "BANK_003",
+      "title": "Bank Account Form Validation - Empty Fields",
+      "category": "Bank Accounts",
+      "priority": "Medium",
+      "tags": ["banking", "validation", "negative"],
+      "preconditions": [
+        "User is logged in",
+        "User is on bank account creation form"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Leave all fields empty",
+          "expected": "All fields are empty"
+        },
+        {
+          "step": 2,
+          "action": "Click 'Save' button",
+          "expected": "Validation errors are displayed for required fields"
+        }
+      ],
+      "expectedResult": "Form validation prevents submission with empty required fields"
+    },
+    {
+      "id": "API_BANK_001",
+      "title": "Bank Accounts API - Full CRUD Operations Manual Test",
+      "category": "API Testing",
+      "priority": "High",
+      "tags": ["api", "banking", "crud", "rest", "graphql", "manual"],
+      "preconditions": [
+        "Application is running on localhost:3000",
+        "Test user account exists (Heath93/s3cret)",
+        "API testing tool available (Postman, curl, or browser dev tools)",
+        "User authentication token obtained"
+      ],
+      "testData": {
+        "apiUrl": "http://localhost:3000/api",
+        "testUser": "Heath93",
+        "testPassword": "s3cret",
+        "testBankName": "Test Bank Corp",
+        "testAccountNumber": "1234567890",
+        "testRoutingNumber": "987654321"
+      },
+      "steps": [
+        {
+          "step": 1,
+          "action": "SETUP: Login via API to get authentication token",
+          "details": "POST /api/auth/login with credentials {username: 'Heath93', password: 's3cret'}",
+          "expected": "Receive 200 status and authentication token in response"
+        },
+        {
+          "step": 2,
+          "action": "TEST: GET /api/bankAccounts - Retrieve user's bank accounts",
+          "details": "Send GET request to /api/bankAccounts with Authorization header",
+          "expected": "Status: 200, Response contains array of bank accounts for authenticated user"
+        },
+        {
+          "step": 3,
+          "action": "VERIFY: Check response structure for GET bank accounts",
+          "details": "Validate response has 'results' array and first item has 'userId' matching authenticated user",
+          "expected": "Response structure is correct and userId matches authenticated user"
+        },
+        {
+          "step": 4,
+          "action": "TEST: POST /api/bankAccounts - Create new bank account",
+          "details": "Send POST request with body: {bankName: 'Test Bank Corp', accountNumber: '1234567890', routingNumber: '987654321'}",
+          "expected": "Status: 200, Response contains newly created bank account with generated ID"
+        },
+        {
+          "step": 5,
+          "action": "VERIFY: Check created bank account response",
+          "details": "Validate response has 'account' object with 'id' (string) and 'userId' matching authenticated user",
+          "expected": "Created bank account has valid structure and correct userId"
+        },
+        {
+          "step": 6,
+          "action": "STORE: Save created bank account ID for subsequent tests",
+          "details": "Extract and store the 'id' field from the created bank account for use in GET and DELETE tests",
+          "expected": "Bank account ID is captured for further testing"
+        },
+        {
+          "step": 7,
+          "action": "TEST: GET /api/bankAccounts/{id} - Retrieve specific bank account",
+          "details": "Send GET request to /api/bankAccounts/{bankAccountId} using ID from step 6",
+          "expected": "Status: 200, Response contains the specific bank account details"
+        },
+        {
+          "step": 8,
+          "action": "VERIFY: Check individual bank account response",
+          "details": "Validate response has 'account' object with correct userId and matching the created account details",
+          "expected": "Retrieved bank account matches the created account and belongs to authenticated user"
+        },
+        {
+          "step": 9,
+          "action": "TEST: GraphQL Query - List bank accounts",
+          "details": "Send POST to /api/graphql with query: 'query { listBankAccount { id uuid userId bankName accountNumber routingNumber isDeleted createdAt modifiedAt } }'",
+          "expected": "Status: 200, Response contains GraphQL data with bank accounts array"
+        },
+        {
+          "step": 10,
+          "action": "VERIFY: Check GraphQL response structure",
+          "details": "Validate response has 'data.listBankAccount' array with no errors, first item has userId matching authenticated user",
+          "expected": "GraphQL response is properly formatted and contains user's bank accounts"
+        },
+        {
+          "step": 11,
+          "action": "TEST: GraphQL Mutation - Create bank account",
+          "details": "Send POST to /api/graphql with mutation: 'mutation createBankAccount($bankName: String!, $accountNumber: String!, $routingNumber: String!) { createBankAccount(bankName: $bankName, accountNumber: $accountNumber, routingNumber: $routingNumber) { id uuid userId bankName accountNumber routingNumber isDeleted createdAt } }' and variables",
+          "expected": "Status: 200, Response contains created bank account via GraphQL"
+        },
+        {
+          "step": 12,
+          "action": "VERIFY: Check GraphQL creation response",
+          "details": "Validate response has 'data.createBankAccount' with userId matching authenticated user",
+          "expected": "Bank account created via GraphQL has correct userId"
+        },
+        {
+          "step": 13,
+          "action": "TEST: DELETE /api/bankAccounts/{id} - Delete bank account",
+          "details": "Send DELETE request to /api/bankAccounts/{bankAccountId} using ID from step 6",
+          "expected": "Status: 200, Bank account is successfully deleted"
+        },
+        {
+          "step": 14,
+          "action": "TEST: GraphQL Mutation - Delete bank account",
+          "details": "Send POST to /api/graphql with mutation: 'mutation deleteBankAccount($id: ID!) { deleteBankAccount(id: $id) }' using a valid bank account ID",
+          "expected": "Status: 200, Bank account is successfully deleted via GraphQL"
+        },
+        {
+          "step": 15,
+          "action": "VERIFY: Confirm deletion",
+          "details": "Send GET request to /api/bankAccounts to verify the deleted accounts are no longer present",
+          "expected": "Deleted bank accounts are not returned in the list"
+        }
+      ],
+      "expectedResult": "All bank account API endpoints (REST and GraphQL) function correctly: GET returns user's accounts, POST creates new accounts, DELETE removes accounts, and GraphQL queries/mutations work as expected",
+      "notes": [
+        "This test covers the same scenarios as the automated api-bankaccounts.spec.ts test",
+        "Requires API testing tool (Postman, curl, or browser dev tools)",
+        "Authentication token must be obtained and included in all requests",
+        "Test data should use realistic bank names and account numbers",
+        "GraphQL mutations should include proper variable binding",
+        "Error handling can be tested by using invalid IDs or missing authentication"
+      ],
+      "apiEndpoints": [
+        {
+          "method": "GET",
+          "url": "/api/bankAccounts",
+          "description": "Get all bank accounts for authenticated user"
+        },
+        {
+          "method": "POST",
+          "url": "/api/bankAccounts",
+          "description": "Create new bank account",
+          "bodyExample": {
+            "bankName": "Test Bank Corp",
+            "accountNumber": "1234567890",
+            "routingNumber": "987654321"
+          }
+        },
+        {
+          "method": "GET",
+          "url": "/api/bankAccounts/{id}",
+          "description": "Get specific bank account by ID"
+        },
+        {
+          "method": "DELETE",
+          "url": "/api/bankAccounts/{id}",
+          "description": "Delete bank account by ID"
+        },
+        {
+          "method": "POST",
+          "url": "/api/graphql",
+          "description": "GraphQL endpoint for bank account operations",
+          "bodyExample": {
+            "query": "query { listBankAccount { id userId bankName accountNumber routingNumber } }"
+          }
+        }
+      ]
+    },
+    {
+      "id": "NAV_001",
+      "title": "Navigate Between Transaction Feeds",
+      "category": "Navigation",
+      "priority": "High",
+      "tags": ["navigation", "positive", "smoke"],
+      "preconditions": [
+        "User is logged in",
+        "User is on home page"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Click 'Public' tab",
+          "expected": "Public transactions are displayed"
+        },
+        {
+          "step": 2,
+          "action": "Click 'Contacts' tab",
+          "expected": "Contacts transactions are displayed"
+        },
+        {
+          "step": 3,
+          "action": "Click 'Personal' tab",
+          "expected": "Personal transactions are displayed"
+        }
+      ],
+      "expectedResult": "User can successfully navigate between different transaction feeds"
+    },
+    {
+      "id": "NAV_002",
+      "title": "Mobile Navigation - Drawer Toggle",
+      "category": "Navigation",
+      "priority": "Medium",
+      "tags": ["mobile", "navigation", "responsive"],
+      "preconditions": [
+        "User is logged in",
+        "Application is viewed on mobile device or mobile viewport"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Click hamburger menu icon",
+          "expected": "Navigation drawer opens"
+        },
+        {
+          "step": 2,
+          "action": "Click any navigation item",
+          "expected": "Navigation drawer closes and user navigates to selected page"
+        }
+      ],
+      "expectedResult": "Mobile navigation drawer functions correctly"
+    },
+    {
+      "id": "NOTIF_001",
+      "title": "View Notifications",
+      "category": "Notifications",
+      "priority": "Medium",
+      "tags": ["notifications", "positive", "social"],
+      "preconditions": [
+        "User is logged in",
+        "User has received notifications"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Check notification badge in top navigation",
+          "expected": "Notification count is displayed"
+        },
+        {
+          "step": 2,
+          "action": "Click notifications icon",
+          "expected": "Notifications list is displayed"
+        },
+        {
+          "step": 3,
+          "action": "Click on a notification",
+          "expected": "User is navigated to relevant transaction or page"
+        }
+      ],
+      "expectedResult": "Notifications are displayed and clickable"
+    },
+    {
+      "id": "SETTINGS_001",
+      "title": "Update User Settings - Valid Data",
+      "category": "User Settings",
+      "priority": "Medium",
+      "tags": ["settings", "positive", "profile"],
+      "preconditions": [
+        "User is logged in",
+        "User navigates to User Settings page"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Update first name: 'UpdatedFirstName'",
+          "expected": "First name field accepts new input"
+        },
+        {
+          "step": 2,
+          "action": "Update last name: 'UpdatedLastName'",
+          "expected": "Last name field accepts new input"
+        },
+        {
+          "step": 3,
+          "action": "Update email: 'updated@email.com'",
+          "expected": "Email field accepts new input"
+        },
+        {
+          "step": 4,
+          "action": "Update phone: '555-123-4567'",
+          "expected": "Phone field accepts new input"
+        },
+        {
+          "step": 5,
+          "action": "Click 'Save' button",
+          "expected": "Settings are updated and success message is displayed"
+        }
+      ],
+      "expectedResult": "User settings are successfully updated",
+      "testData": {
+        "firstName": "UpdatedFirstName",
+        "lastName": "UpdatedLastName",
+        "email": "updated@email.com",
+        "phone": "555-123-4567"
+      }
+    },
+    {
+      "id": "SETTINGS_002",
+      "title": "User Settings Form Validation - Invalid Email",
+      "category": "User Settings",
+      "priority": "Medium",
+      "tags": ["settings", "validation", "negative"],
+      "preconditions": [
+        "User is logged in",
+        "User is on User Settings page"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Enter invalid email: 'invalid-email'",
+          "expected": "Email field accepts input"
+        },
+        {
+          "step": 2,
+          "action": "Click 'Save' button",
+          "expected": "Validation error for invalid email format is displayed"
+        }
+      ],
+      "expectedResult": "Form validation prevents submission with invalid email format",
+      "testData": {
+        "email": "invalid-email"
+      }
+    },
+    {
+      "id": "FILTER_001",
+      "title": "Filter Transactions by Date Range",
+      "category": "Filters",
+      "priority": "Medium",
+      "tags": ["filter", "positive", "date"],
+      "preconditions": [
+        "User is logged in",
+        "User is on any transaction feed page",
+        "Transactions exist for filtering"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Click on date range filter",
+          "expected": "Date range picker is displayed"
+        },
+        {
+          "step": 2,
+          "action": "Select start date and end date",
+          "expected": "Date range is selected"
+        },
+        {
+          "step": 3,
+          "action": "Apply filter",
+          "expected": "Transactions are filtered to show only those within the selected date range"
+        }
+      ],
+      "expectedResult": "Transactions are successfully filtered by date range"
+    },
+    {
+      "id": "FILTER_002",
+      "title": "Filter Transactions by Amount Range",
+      "category": "Filters",
+      "priority": "Medium",
+      "tags": ["filter", "positive", "amount"],
+      "preconditions": [
+        "User is logged in",
+        "User is on any transaction feed page",
+        "Transactions exist for filtering"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Click on amount range filter",
+          "expected": "Amount range slider is displayed"
+        },
+        {
+          "step": 2,
+          "action": "Adjust minimum and maximum amount values",
+          "expected": "Amount range is set"
+        },
+        {
+          "step": 3,
+          "action": "Apply filter",
+          "expected": "Transactions are filtered to show only those within the selected amount range"
+        }
+      ],
+      "expectedResult": "Transactions are successfully filtered by amount range"
+    },
+    {
+      "id": "PAGINATION_001",
+      "title": "Transaction Feed Pagination",
+      "category": "Pagination",
+      "priority": "Medium",
+      "tags": ["pagination", "positive", "performance"],
+      "preconditions": [
+        "User is logged in",
+        "User is on a transaction feed with multiple pages of data"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Scroll to bottom of transaction list",
+          "expected": "Next page of transactions is loaded automatically"
+        },
+        {
+          "step": 2,
+          "action": "Verify new transactions are appended to the list",
+          "expected": "Additional transactions are visible"
+        }
+      ],
+      "expectedResult": "Pagination works correctly and loads additional transactions"
+    },
+    {
+      "id": "RESPONSIVE_001",
+      "title": "Mobile Responsive Design",
+      "category": "Responsive Design",
+      "priority": "Medium",
+      "tags": ["mobile", "responsive", "ui"],
+      "preconditions": [
+        "User is logged in",
+        "Application is viewed on mobile device or mobile viewport"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Navigate through different pages",
+          "expected": "All pages are properly formatted for mobile"
+        },
+        {
+          "step": 2,
+          "action": "Test form inputs on mobile",
+          "expected": "Form inputs are usable on mobile devices"
+        },
+        {
+          "step": 3,
+          "action": "Test navigation on mobile",
+          "expected": "Navigation is accessible via hamburger menu"
+        }
+      ],
+      "expectedResult": "Application is fully responsive and usable on mobile devices"
+    },
+    {
+      "id": "SECURITY_001",
+      "title": "Unauthorized Access Protection",
+      "category": "Security",
+      "priority": "High",
+      "tags": ["security", "negative", "access"],
+      "preconditions": [
+        "User is not logged in"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Attempt to access '/personal' URL directly",
+          "expected": "User is redirected to sign in page"
+        },
+        {
+          "step": 2,
+          "action": "Attempt to access '/transaction/new' URL directly",
+          "expected": "User is redirected to sign in page"
+        },
+        {
+          "step": 3,
+          "action": "Attempt to access '/user/settings' URL directly",
+          "expected": "User is redirected to sign in page"
+        }
+      ],
+      "expectedResult": "Protected routes are inaccessible without authentication"
+    },
+    {
+      "id": "BALANCE_001",
+      "title": "User Balance Display and Updates",
+      "category": "Balance Management",
+      "priority": "High",
+      "tags": ["balance", "positive", "money"],
+      "preconditions": [
+        "User is logged in",
+        "User has a known balance amount"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Check current balance in navigation",
+          "expected": "Current balance is displayed correctly"
+        },
+        {
+          "step": 2,
+          "action": "Create a payment transaction",
+          "expected": "Balance decreases by the payment amount"
+        },
+        {
+          "step": 3,
+          "action": "Receive a payment",
+          "expected": "Balance increases by the received amount"
+        }
+      ],
+      "expectedResult": "User balance is accurately displayed and updated after transactions"
+    },
+    {
+      "id": "ONBOARD_001",
+      "title": "User Onboarding Flow - New User",
+      "category": "Onboarding",
+      "priority": "High",
+      "tags": ["onboarding", "positive", "smoke", "new-user"],
+      "preconditions": [
+        "User is logged in for first time",
+        "User has no bank accounts"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Check onboarding dialog is displayed",
+          "expected": "Welcome dialog shows 'Get Started with Real World App'"
+        },
+        {
+          "step": 2,
+          "action": "Click 'Next' button",
+          "expected": "Proceed to 'Create Bank Account' step"
+        },
+        {
+          "step": 3,
+          "action": "Fill bank account form with valid data",
+          "expected": "Bank account form accepts all inputs"
+        },
+        {
+          "step": 4,
+          "action": "Submit bank account creation",
+          "expected": "Progress to 'Finished' step with success message"
+        },
+        {
+          "step": 5,
+          "action": "Complete onboarding",
+          "expected": "User is taken to transaction dashboard"
+        }
+      ],
+      "expectedResult": "New user successfully completes onboarding and can use the application"
+    },
+    {
+      "id": "ONBOARD_002",
+      "title": "User Onboarding Flow - Skip and Logout",
+      "category": "Onboarding",
+      "priority": "Medium",
+      "tags": ["onboarding", "negative", "logout"],
+      "preconditions": [
+        "User is in onboarding flow",
+        "User is on any onboarding step"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Click 'Logout' button in onboarding dialog",
+          "expected": "User is logged out and redirected to sign in page"
+        }
+      ],
+      "expectedResult": "User can exit onboarding by logging out"
+    },
+    {
+      "id": "CONTACT_001",
+      "title": "Search and Add User as Contact",
+      "category": "Contact Management",
+      "priority": "Medium",
+      "tags": ["contacts", "positive", "search"],
+      "preconditions": [
+        "User is logged in",
+        "Other users exist in the system"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Navigate to new transaction page",
+          "expected": "New transaction form is displayed"
+        },
+        {
+          "step": 2,
+          "action": "Search for user by first name",
+          "expected": "User list is filtered showing matching results"
+        },
+        {
+          "step": 3,
+          "action": "Search for user by last name",
+          "expected": "User list is filtered showing matching results"
+        },
+        {
+          "step": 4,
+          "action": "Search for user by username",
+          "expected": "User list is filtered showing matching results"
+        },
+        {
+          "step": 5,
+          "action": "Clear search field",
+          "expected": "Full user list is restored"
+        }
+      ],
+      "expectedResult": "User search functionality works across different user fields"
+    },
+    {
+      "id": "CONTACT_002",
+      "title": "View Contacts Transactions Feed",
+      "category": "Contact Management",
+      "priority": "Medium",
+      "tags": ["contacts", "positive", "feed"],
+      "preconditions": [
+        "User is logged in",
+        "User has contacts in the system",
+        "Transactions exist with contacts"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Navigate to home page",
+          "expected": "Transaction feeds are displayed"
+        },
+        {
+          "step": 2,
+          "action": "Click 'Contacts' tab",
+          "expected": "Only transactions involving user's contacts are shown"
+        },
+        {
+          "step": 3,
+          "action": "Verify transaction participants",
+          "expected": "All displayed transactions include user's contacts as participants"
+        }
+      ],
+      "expectedResult": "Contacts feed shows only transactions involving user's contacts"
+    },
+    {
+      "id": "AUTH_005",
+      "title": "Third Party Authentication - Auth0",
+      "category": "Authentication",
+      "priority": "Medium",
+      "tags": ["auth0", "third-party", "integration"],
+      "preconditions": [
+        "Auth0 is configured",
+        "User has Auth0 account"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Access application with Auth0 configuration",
+          "expected": "User is redirected to Auth0 login page"
+        },
+        {
+          "step": 2,
+          "action": "Complete Auth0 authentication",
+          "expected": "User is redirected back to application"
+        },
+        {
+          "step": 3,
+          "action": "Complete onboarding if required",
+          "expected": "User can access application features"
+        }
+      ],
+      "expectedResult": "Third party authentication via Auth0 works correctly"
+    },
+    {
+      "id": "AUTH_006",
+      "title": "Third Party Authentication - Okta",
+      "category": "Authentication",
+      "priority": "Medium",
+      "tags": ["okta", "third-party", "integration"],
+      "preconditions": [
+        "Okta is configured",
+        "User has Okta account"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Access application with Okta configuration",
+          "expected": "User is redirected to Okta login page"
+        },
+        {
+          "step": 2,
+          "action": "Complete Okta authentication",
+          "expected": "User is redirected back to application"
+        },
+        {
+          "step": 3,
+          "action": "Complete onboarding if required",
+          "expected": "User can access application features"
+        }
+      ],
+      "expectedResult": "Third party authentication via Okta works correctly"
+    },
+    {
+      "id": "AUTH_007",
+      "title": "Third Party Authentication - AWS Cognito",
+      "category": "Authentication",
+      "priority": "Medium",
+      "tags": ["cognito", "third-party", "integration"],
+      "preconditions": [
+        "AWS Cognito is configured",
+        "User has Cognito account"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Access application with Cognito configuration",
+          "expected": "User is redirected to Cognito login page"
+        },
+        {
+          "step": 2,
+          "action": "Complete Cognito authentication",
+          "expected": "User is redirected back to application"
+        },
+        {
+          "step": 3,
+          "action": "Complete onboarding if required",
+          "expected": "User can access application features"
+        }
+      ],
+      "expectedResult": "Third party authentication via AWS Cognito works correctly"
+    },
+    {
+      "id": "AUTH_008",
+      "title": "Third Party Authentication - Google",
+      "category": "Authentication",
+      "priority": "Medium",
+      "tags": ["google", "third-party", "integration"],
+      "preconditions": [
+        "Google authentication is configured",
+        "User has Google account"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Access application with Google configuration",
+          "expected": "Google login button is displayed"
+        },
+        {
+          "step": 2,
+          "action": "Click Google login button",
+          "expected": "User is redirected to Google authentication"
+        },
+        {
+          "step": 3,
+          "action": "Complete Google authentication",
+          "expected": "User is redirected back to application"
+        },
+        {
+          "step": 4,
+          "action": "Complete onboarding if required",
+          "expected": "User can access application features"
+        }
+      ],
+      "expectedResult": "Third party authentication via Google works correctly"
+    },
+    {
+      "id": "BANK_004",
+      "title": "Bank Transfer - Insufficient Funds",
+      "category": "Bank Accounts",
+      "priority": "High",
+      "tags": ["banking", "negative", "funds"],
+      "preconditions": [
+        "User is logged in",
+        "User has bank account",
+        "User has insufficient balance for transaction"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Attempt to create payment exceeding current balance",
+          "expected": "Transaction is processed"
+        },
+        {
+          "step": 2,
+          "action": "Check if bank transfer withdrawal is created",
+          "expected": "Bank transfer withdrawal covers the deficit amount"
+        },
+        {
+          "step": 3,
+          "action": "Verify user balance is reset to zero",
+          "expected": "User balance shows $0.00"
+        }
+      ],
+      "expectedResult": "System handles insufficient funds by creating bank transfer withdrawal"
+    },
+    {
+      "id": "BANK_005",
+      "title": "View Bank Transfers History",
+      "category": "Bank Accounts",
+      "priority": "Medium",
+      "tags": ["banking", "positive", "history"],
+      "preconditions": [
+        "User is logged in",
+        "User has bank transfers (withdrawals/deposits)"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Navigate to bank transfers section",
+          "expected": "Bank transfers list is displayed"
+        },
+        {
+          "step": 2,
+          "action": "Verify transfer details",
+          "expected": "Transfer amount, type, and date are shown correctly"
+        }
+      ],
+      "expectedResult": "User can view their bank transfer history"
+    },
+    {
+      "id": "ERROR_001",
+      "title": "Error Handling - Network Failure",
+      "category": "Error Handling",
+      "priority": "Medium",
+      "tags": ["error", "negative", "network"],
+      "preconditions": [
+        "User is logged in",
+        "Network connectivity can be controlled"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Simulate network failure during transaction creation",
+          "expected": "Error message is displayed to user"
+        },
+        {
+          "step": 2,
+          "action": "Restore network connectivity",
+          "expected": "User can retry the failed operation"
+        }
+      ],
+      "expectedResult": "Application handles network errors gracefully"
+    },
+    {
+      "id": "ERROR_002",
+      "title": "Error Handling - Server Error",
+      "category": "Error Handling",
+      "priority": "Medium",
+      "tags": ["error", "negative", "server"],
+      "preconditions": [
+        "User is logged in",
+        "Server can return error responses"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Trigger server error (500 status)",
+          "expected": "Appropriate error message is displayed"
+        },
+        {
+          "step": 2,
+          "action": "Verify application remains stable",
+          "expected": "User can continue using other features"
+        }
+      ],
+      "expectedResult": "Application handles server errors gracefully without crashing"
+    },
+    {
+      "id": "ACCESSIBILITY_001",
+      "title": "Keyboard Navigation",
+      "category": "Accessibility",
+      "priority": "Medium",
+      "tags": ["accessibility", "keyboard", "a11y"],
+      "preconditions": [
+        "User is on the application",
+        "Keyboard navigation is enabled"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Navigate through forms using Tab key",
+          "expected": "Focus moves logically through form elements"
+        },
+        {
+          "step": 2,
+          "action": "Activate buttons using Enter/Space keys",
+          "expected": "Buttons respond to keyboard activation"
+        },
+        {
+          "step": 3,
+          "action": "Navigate menus using arrow keys",
+          "expected": "Menu navigation works with keyboard"
+        }
+      ],
+      "expectedResult": "All application features are accessible via keyboard navigation"
+    },
+    {
+      "id": "ACCESSIBILITY_002",
+      "title": "Screen Reader Compatibility",
+      "category": "Accessibility",
+      "priority": "Medium",
+      "tags": ["accessibility", "screen-reader", "a11y"],
+      "preconditions": [
+        "Screen reader software is available",
+        "User is on the application"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Navigate application with screen reader",
+          "expected": "Screen reader announces page elements correctly"
+        },
+        {
+          "step": 2,
+          "action": "Check form labels and error messages",
+          "expected": "Form elements have proper labels and error announcements"
+        },
+        {
+          "step": 3,
+          "action": "Verify ARIA attributes on interactive elements",
+          "expected": "Interactive elements have appropriate ARIA labels"
+        }
+      ],
+      "expectedResult": "Application is fully compatible with screen readers"
+    },
+    {
+      "id": "PERFORMANCE_001",
+      "title": "Transaction List Loading Performance",
+      "category": "Performance",
+      "priority": "Medium",
+      "tags": ["performance", "loading", "pagination"],
+      "preconditions": [
+        "User is logged in",
+        "Large number of transactions exist"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Navigate to transaction feed",
+          "expected": "Initial page loads within acceptable time"
+        },
+        {
+          "step": 2,
+          "action": "Scroll to load more transactions",
+          "expected": "Pagination works smoothly without delays"
+        },
+        {
+          "step": 3,
+          "action": "Apply filters to transaction list",
+          "expected": "Filtered results load quickly"
+        }
+      ],
+      "expectedResult": "Application maintains good performance with large datasets"
+    },
+    {
+      "id": "PRIVACY_001",
+      "title": "Transaction Privacy Levels",
+      "category": "Privacy",
+      "priority": "Medium",
+      "tags": ["privacy", "positive", "visibility"],
+      "preconditions": [
+        "User is logged in",
+        "Multiple users exist in system"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Create transaction with 'Private' privacy level",
+          "expected": "Transaction is not visible in public feed"
+        },
+        {
+          "step": 2,
+          "action": "Create transaction with 'Public' privacy level",
+          "expected": "Transaction appears in public feed for other users"
+        },
+        {
+          "step": 3,
+          "action": "Verify privacy settings are respected",
+          "expected": "Each transaction respects its privacy setting"
+        }
+      ],
+      "expectedResult": "Transaction privacy levels control visibility correctly"
+    },
+    {
+      "id": "EDGE_001",
+      "title": "Edge Case - Maximum Amount Transaction",
+      "category": "Edge Cases",
+      "priority": "Low",
+      "tags": ["edge-case", "amount", "limit"],
+      "preconditions": [
+        "User is logged in",
+        "User has contacts available"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Attempt to create transaction with very large amount",
+          "expected": "System handles large amounts appropriately"
+        },
+        {
+          "step": 2,
+          "action": "Verify amount formatting and display",
+          "expected": "Large amounts are formatted correctly"
+        }
+      ],
+      "expectedResult": "System handles edge cases for transaction amounts"
+    },
+    {
+      "id": "EDGE_002",
+      "title": "Edge Case - Special Characters in Forms",
+      "category": "Edge Cases",
+      "priority": "Low",
+      "tags": ["edge-case", "validation", "characters"],
+      "preconditions": [
+        "User is on any form in the application"
+      ],
+      "steps": [
+        {
+          "step": 1,
+          "action": "Enter special characters in text fields",
+          "expected": "System handles special characters appropriately"
+        },
+        {
+          "step": 2,
+          "action": "Enter emojis in description fields",
+          "expected": "Emojis are accepted or gracefully rejected"
+        },
+        {
+          "step": 3,
+          "action": "Test very long input strings",
+          "expected": "System enforces reasonable length limits"
+        }
+      ],
+      "expectedResult": "Forms handle edge cases in user input gracefully"
+    }
+  ]
+}

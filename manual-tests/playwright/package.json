@@ -1,0 +1,32 @@
+{
+  "name": "cypress-realworld-app-playwright-tests",
+  "version": "1.0.0",
+  "description": "Playwright test scripts for Cypress Real World App manual test scenarios",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:ui": "playwright test --ui",
+    "test:auth": "playwright test auth-signin.spec.js",
+    "test:transactions": "playwright test transaction-payment.spec.js",
+    "test:chrome": "playwright test --project=chromium",
+    "test:firefox": "playwright test --project=firefox",
+    "test:safari": "playwright test --project=webkit",
+    "test:mobile": "playwright test --project='Mobile Chrome'",
+    "report": "playwright show-report manual-tests/playwright/reports/html",
+    "install": "playwright install",
+    "install-deps": "playwright install-deps"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0"
+  },
+  "keywords": [
+    "playwright",
+    "testing",
+    "automation",
+    "cypress-realworld-app",
+    "manual-tests"
+  ],
+  "author": "Test Explorer Agent",
+  "license": "MIT"
+}

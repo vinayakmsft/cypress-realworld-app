@@ -1,0 +1,167 @@
+{
+  "selectors": {
+    "authentication": {
+      "signUpForm": {
+        "firstName": "[data-test='signup-first-name']",
+        "lastName": "[data-test='signup-last-name']",
+        "username": "[data-test='signup-username']",
+        "password": "[data-test='signup-password']",
+        "confirmPassword": "[data-test='signup-confirm-password']",
+        "submitButton": "[data-test='signup-submit']",
+        "signInLink": "[data-test='signup-signin']"
+      },
+      "signInForm": {
+        "username": "[data-test='signin-username']",
+        "password": "[data-test='signin-password']",
+        "submitButton": "[data-test='signin-submit']",
+        "signUpLink": "[data-test='signin-signup']",
+        "rememberMe": "[data-test='signin-remember-me']"
+      },
+      "errorMessages": {
+        "invalidCredentials": "[data-test='signin-error']",
+        "fieldRequired": "[data-test*='helper-text']"
+      }
+    },
+    "navigation": {
+      "topNavigation": {
+        "appLogo": "[data-test='app-name-logo']",
+        "newTransaction": "[data-test='nav-top-new-transaction']",
+        "notifications": "[data-test='nav-top-notifications']",
+        "notificationCount": "[data-test='nav-top-notifications-count']",
+        "userBalance": "[data-test='sidenav-user-balance']"
+      },
+      "sideNavigation": {
+        "toggle": "[data-test='sidenav-toggle']",
+        "home": "[data-test='sidenav-home']",
+        "myAccount": "[data-test='sidenav-my-account']",
+        "bankAccounts": "[data-test='sidenav-bank-accounts']",
+        "notifications": "[data-test='sidenav-notifications']",
+        "logout": "[data-test='sidenav-signout']",
+        "userSettings": "[data-test='sidenav-user-settings']"
+      },
+      "transactionTabs": {
+        "container": "[data-test='nav-transaction-tabs']",
+        "public": "[data-test='nav-public-tab']",
+        "contacts": "[data-test='nav-contacts-tab']",
+        "personal": "[data-test='nav-personal-tab']"
+      }
+    },
+    "transactions": {
+      "transactionList": {
+        "container": "[data-test='transaction-list']",
+        "item": "[data-test*='transaction-item']",
+        "emptyState": "[data-test*='empty-list']",
+        "createButton": "[data-test='transaction-list-empty-create-transaction-button']",
+        "skeleton": "[data-test='list-skeleton']"
+      },
+      "transactionItem": {
+        "sender": "[data-test*='transaction-sender']",
+        "receiver": "[data-test*='transaction-receiver']",
+        "amount": "[data-test*='transaction-amount']",
+        "description": "[data-test*='transaction-description']",
+        "likeCount": "[data-test*='transaction-like-count']",
+        "commentCount": "[data-test*='transaction-comment-count']"
+      },
+      "transactionDetail": {
+        "header": "[data-test='transaction-detail-header']",
+        "amount": "[data-test*='transaction-amount']",
+        "description": "[data-test='transaction-description']",
+        "senderAvatar": "[data-test*='sender-avatar']",
+        "receiverAvatar": "[data-test*='receiver-avatar']",
+        "likeButton": "[data-test*='transaction-like-button']",
+        "likeCount": "[data-test*='transaction-like-count']",
+        "acceptRequest": "[data-test*='transaction-accept-request']",
+        "rejectRequest": "[data-test*='transaction-reject-request']",
+        "commentForm": "[data-test='transaction-comment-form']",
+        "commentInput": "[data-test='transaction-comment-input']",
+        "commentSubmit": "[data-test='transaction-comment-submit']"
+      },
+      "newTransaction": {
+        "form": "[data-test='transaction-create-form']",
+        "userSearch": "[data-test='user-list-search-input']",
+        "userListItem": "[data-test*='user-list-item']",
+        "amountInput": "[data-test*='transaction-create-amount-input']",
+        "descriptionInput": "[data-test*='transaction-create-description-input']",
+        "submitPayment": "[data-test*='transaction-create-submit-payment']",
+        "submitRequest": "[data-test*='transaction-create-submit-request']",
+        "createAnother": "[data-test='new-transaction-create-another-transaction']",
+        "returnToTransactions": "[data-test='new-transaction-return-to-transactions']"
+      }
+    },
+    "bankAccounts": {
+      "list": "[data-test='bankaccount-list']",
+      "createButton": "[data-test='bankaccount-new']",
+      "form": {
+        "bankName": "[data-test='bankaccount-bankName-input']",
+        "routingNumber": "[data-test='bankaccount-routingNumber-input']",
+        "accountNumber": "[data-test='bankaccount-accountNumber-input']",
+        "submit": "[data-test='bankaccount-submit']"
+      },
+      "listItem": {
+        "container": "[data-test*='bankaccount-list-item']",
+        "delete": "[data-test*='bankaccount-delete']"
+      }
+    },
+    "userSettings": {
+      "form": "[data-test='user-settings-form']",
+      "firstName": "[data-test*='user-settings-firstName-input']",
+      "lastName": "[data-test*='user-settings-lastName-input']",
+      "email": "[data-test*='user-settings-email-input']",
+      "phoneNumber": "[data-test*='user-settings-phoneNumber-input']",
+      "submit": "[data-test='user-settings-submit']"
+    },
+    "filters": {
+      "dateRange": {
+        "button": "[data-test*='filter-date-range-button']",
+        "drawer": "[data-test='date-range-filter-drawer']",
+        "close": "[data-test='date-range-filter-drawer-close']",
+        "calendar": ".Cal__Header__root"
+      },
+      "amountRange": {
+        "slider": "[data-test*='transaction-list-filter-amount-range-slider']",
+        "clear": "[data-test*='transaction-list-filter-amount-range-clear']"
+      }
+    },
+    "notifications": {
+      "list": "[data-test='notifications-list']",
+      "item": "[data-test*='notification-list-item']",
+      "markAsRead": "[data-test*='notification-mark-read']"
+    },
+    "alerts": {
+      "success": "[data-test='alert-bar-success']",
+      "error": "[data-test='alert-bar-error']",
+      "warning": "[data-test='alert-bar-warning']",
+      "info": "[data-test='alert-bar-info']"
+    },
+    "common": {
+      "loadingSpinner": "[data-test='loading-spinner']",
+      "confirmDialog": "[data-test='confirm-dialog']",
+      "confirmButton": "[data-test='confirm-button']",
+      "cancelButton": "[data-test='cancel-button']",
+      "backdrop": ".MuiBackdrop-root"
+    }
+  },
+  "selectorPatterns": {
+    "dataTest": "[data-test='{value}']",
+    "dataTestLike": "[data-test*='{value}']",
+    "dataTestContains": "[data-test*='{value}']",
+    "byText": ":contains('{text}')",
+    "byPartialText": ":contains('{text}')",
+    "helperText": "#user-settings-{field}-input-helper-text"
+  },
+  "customSelectors": {
+    "getUserListItem": "(firstName) => `[data-test*='user-list-item']:contains('${firstName}')`",
+    "getTransactionItem": "(transactionId) => `[data-test='transaction-item-${transactionId}']`",
+    "getNotificationItem": "(notificationId) => `[data-test='notification-list-item-${notificationId}']`",
+    "getBankAccountItem": "(bankAccountId) => `[data-test='bankaccount-list-item-${bankAccountId}']`",
+    "getTransactionLikeButton": "(transactionId) => `[data-test='transaction-like-button-${transactionId}']`",
+    "getTransactionAcceptButton": "(transactionId) => `[data-test='transaction-accept-request-${transactionId}']`",
+    "getTransactionRejectButton": "(transactionId) => `[data-test='transaction-reject-request-${transactionId}']`"
+  },
+  "notes": {
+    "selectorStrategy": "The application uses data-test attributes as the primary selector strategy for test automation",
+    "dynamicSelectors": "Some selectors include dynamic IDs that need to be constructed at runtime",
+    "responsiveConsiderations": "Mobile view may require different interaction patterns (e.g., opening drawer first)",
+    "loadingStates": "Many components have loading states that should be waited for before interaction"
+  }
+}

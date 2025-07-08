@@ -1,0 +1,289 @@
+{
+  "testData": {
+    "users": {
+      "validUser": {
+        "username": "Heath93",
+        "password": "s3cret",
+        "firstName": "Ted",
+        "lastName": "Parisian",
+        "email": "Santos.Runte65@gmail.com",
+        "phoneNumber": "398-225-9900",
+        "balance": 150953
+      },
+      "secondUser": {
+        "username": "Arvilla_Hegmann",
+        "password": "s3cret",
+        "firstName": "Kristian",
+        "lastName": "Bradtke",
+        "email": "Skyla.Stamm@yahoo.com",
+        "phoneNumber": "410-786-2112",
+        "balance": 93026
+      },
+      "invalidUser": {
+        "username": "invaliduser",
+        "password": "wrongpassword"
+      },
+      "newUser": {
+        "firstName": "John",
+        "lastName": "Doe",
+        "username": "johndoe123",
+        "password": "password123",
+        "email": "john.doe@example.com",
+        "phoneNumber": "555-123-4567"
+      }
+    },
+    "transactions": {
+      "validPayment": {
+        "amount": "25.00",
+        "description": "Lunch payment",
+        "transactionType": "payment"
+      },
+      "validRequest": {
+        "amount": "50.00",
+        "description": "Dinner split",
+        "transactionType": "request"
+      },
+      "largePayment": {
+        "amount": "500.00",
+        "description": "Large payment for services",
+        "transactionType": "payment"
+      },
+      "smallPayment": {
+        "amount": "5.00",
+        "description": "Coffee",
+        "transactionType": "payment"
+      },
+      "invalidAmountZero": {
+        "amount": "0.00",
+        "description": "Invalid zero amount",
+        "transactionType": "payment"
+      },
+      "invalidAmountNegative": {
+        "amount": "-10.00",
+        "description": "Invalid negative amount",
+        "transactionType": "payment"
+      },
+      "emptyDescription": {
+        "amount": "25.00",
+        "description": "",
+        "transactionType": "payment"
+      },
+      "longDescription": {
+        "amount": "25.00",
+        "description": "This is a very long description that should test the maximum character limit for transaction descriptions in the application",
+        "transactionType": "payment"
+      }
+    },
+    "bankAccounts": {
+      "validBankAccount": {
+        "bankName": "Wells Fargo",
+        "accountNumber": "1234567890",
+        "routingNumber": "123456789"
+      },
+      "anotherBankAccount": {
+        "bankName": "Chase Bank",
+        "accountNumber": "0987654321",
+        "routingNumber": "987654321"
+      },
+      "invalidBankAccount": {
+        "bankName": "",
+        "accountNumber": "",
+        "routingNumber": ""
+      },
+      "invalidRoutingNumber": {
+        "bankName": "Test Bank",
+        "accountNumber": "1234567890",
+        "routingNumber": "123"
+      }
+    },
+    "userSettings": {
+      "updatedProfile": {
+        "firstName": "UpdatedFirstName",
+        "lastName": "UpdatedLastName",
+        "email": "updated@email.com",
+        "phoneNumber": "555-987-6543"
+      },
+      "invalidEmail": {
+        "firstName": "Test",
+        "lastName": "User",
+        "email": "invalid-email",
+        "phoneNumber": "555-123-4567"
+      },
+      "emptyFields": {
+        "firstName": "",
+        "lastName": "",
+        "email": "",
+        "phoneNumber": ""
+      }
+    },
+    "search": {
+      "validSearchTerms": [
+        "Ted",
+        "Kristian", 
+        "Darrel",
+        "Ruthie",
+        "Lia"
+      ],
+      "invalidSearchTerms": [
+        "NonExistentUser",
+        "XYZ123",
+        "@@@@"
+      ]
+    },
+    "comments": {
+      "validComments": [
+        "Great transaction!",
+        "Thanks for the payment",
+        "Looking forward to next time",
+        "Perfect timing",
+        "Received with thanks"
+      ],
+      "emptyComment": "",
+      "longComment": "This is a very long comment that should test the maximum character limit for comments in the application and see how it handles very lengthy text input from users.",
+      "specialCharacters": "Comment with special characters: !@#$%^&*()_+-=[]{}|;':\",./<>?"
+    },
+    "filters": {
+      "dateRanges": {
+        "lastWeek": {
+          "startDate": "2024-01-01",
+          "endDate": "2024-01-07"
+        },
+        "lastMonth": {
+          "startDate": "2024-01-01",
+          "endDate": "2024-01-31"
+        },
+        "lastYear": {
+          "startDate": "2023-01-01",
+          "endDate": "2023-12-31"
+        }
+      },
+      "amountRanges": {
+        "small": {
+          "min": 0,
+          "max": 50
+        },
+        "medium": {
+          "min": 50,
+          "max": 200
+        },
+        "large": {
+          "min": 200,
+          "max": 1000
+        }
+      }
+    },
+    "validation": {
+      "errorMessages": {
+        "requiredField": "This field is required",
+        "invalidEmail": "Please enter a valid email address",
+        "invalidAmount": "Please enter a valid amount",
+        "minimumAmount": "Amount must be greater than 0",
+        "passwordMismatch": "Passwords do not match",
+        "usernameExists": "Username already exists",
+        "invalidCredentials": "Invalid username or password",
+        "insufficientFunds": "Insufficient funds for this transaction"
+      },
+      "fieldRequirements": {
+        "firstName": {
+          "minLength": 1,
+          "maxLength": 50,
+          "required": true
+        },
+        "lastName": {
+          "minLength": 1,
+          "maxLength": 50,
+          "required": true
+        },
+        "username": {
+          "minLength": 3,
+          "maxLength": 30,
+          "required": true
+        },
+        "password": {
+          "minLength": 4,
+          "maxLength": 100,
+          "required": true
+        },
+        "email": {
+          "format": "email",
+          "required": true
+        },
+        "amount": {
+          "min": 0.01,
+          "max": 999999.99,
+          "required": true
+        },
+        "description": {
+          "minLength": 1,
+          "maxLength": 255,
+          "required": true
+        }
+      }
+    },
+    "api": {
+      "endpoints": {
+        "baseUrl": "http://localhost:3001",
+        "login": "/login",
+        "users": "/users",
+        "transactions": "/transactions",
+        "bankAccounts": "/bankAccounts",
+        "notifications": "/notifications",
+        "graphql": "/graphql"
+      },
+      "headers": {
+        "contentType": "application/json",
+        "accept": "application/json"
+      }
+    },
+    "browser": {
+      "supportedBrowsers": [
+        "Chrome",
+        "Firefox",
+        "Safari",
+        "Edge"
+      ],
+      "mobileViewports": [
+        {
+          "name": "iPhone 12",
+          "width": 390,
+          "height": 844
+        },
+        {
+          "name": "iPad",
+          "width": 768,
+          "height": 1024
+        },
+        {
+          "name": "Samsung Galaxy S21",
+          "width": 384,
+          "height": 854
+        }
+      ],
+      "desktopViewports": [
+        {
+          "name": "Small Desktop",
+          "width": 1024,
+          "height": 768
+        },
+        {
+          "name": "Large Desktop",
+          "width": 1920,
+          "height": 1080
+        }
+      ]
+    },
+    "performance": {
+      "timeouts": {
+        "pageLoad": 30000,
+        "elementWait": 10000,
+        "apiResponse": 5000,
+        "networkIdle": 2000
+      },
+      "limits": {
+        "maxTransactionsPerPage": 20,
+        "maxNotificationsPerPage": 50,
+        "maxSearchResults": 100
+      }
+    }
+  }
+}
